@@ -17,11 +17,18 @@ const { sql, dbConnPoolPromise } = require('../database/db.js');
 // for json path - Tell MS SQL to return results as JSON 
 const SQL_SELECT_ALL = 'SELECT * FROM dbo.Book ORDER BY BookName ASC for json path;';
 
+const SQL_select_join = 'SELECT b.BookId, b.BookName, b.BookDescription, b.BookStock, b.BookPrice, a.AuthorName FROM dbo.Book as b JOIN dbo.Author as a ON (b.AuthorId = a.AuthorId) for json path;'
+//join to get novelist's name as well
+
 // for json path, without_array_wrapper - use for single json result
 const SQL_SELECT_BY_ID = 'SELECT * FROM dbo.Book WHERE BookId = @id for json path, without_array_wrapper;';
 
+
+
 // for json path, without_array_wrapper - use for single json result
 const SQL_SELECT_BY_CATID = 'SELECT * FROM dbo.Book WHERE GenreId = @id ORDER BY BookName ASC for json path;';
+
+const SQL_select_by_join = 'SELECT b.BookId, b.BookName, b.BookDescription, b.BookStock, b.BookPrice, a.AuthorName FROM dbo.Book as b JOIN dbo.Author as a ON (b.AuthorId = a.AuthorId) WHERE b.GenreId = @id ORDER BY b.BookName ASC for json path;'
 
 // Second statement (Select...) returns inserted record identified by BookId = SCOPE_IDENTITY()
 const SQL_INSERT = 'INSERT INTO dbo.Book (GenreId, AuthorId,  BookName, BookDescription, BookStock, BookPrice) VALUES (@GenreId, @AuthorId,  @BookName, @BookDescription, @BookStock, @BookPrice); SELECT * from dbo.Book WHERE BookId = SCOPE_IDENTITY();';
@@ -39,7 +46,7 @@ router.get('/', async (req, res) => {
         const pool = await dbConnPoolPromise
         const result = await pool.request()
             // execute query
-            .query(SQL_SELECT_ALL);
+            .query(SQL_select_join);
         
         // Send HTTP response.
         // JSON data from MS SQL is contained in first element of the recordset.
@@ -93,7 +100,7 @@ router.get('/:id', async (req, res) => {
 // id passed as parameter via url
 // Address http://server:port/Book/:id
 // returns JSON
-router.get('/bycat/:BookId', async (req, res) => {
+router.get('/bycat/:id', async (req, res) => {
 
     // read value of id parameter from the request url
     const genreId = req.params.id;
@@ -115,7 +122,7 @@ router.get('/bycat/:BookId', async (req, res) => {
             // set name parameter(s) in query
             .input('id', sql.Int, genreId)
             // execute query
-            .query(SQL_SELECT_BY_CATID);
+            .query(SQL_select_by_join);
 
         // Send response with JSON result    
         res.json(result.recordset[0])

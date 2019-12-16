@@ -81,19 +81,19 @@ SET IDENTITY_INSERT [dbo].[AppUser] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Genre] ON 
 GO
-INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (1, N'Horror')
+INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (1, N'Art')
 GO
-INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (2, N'Surrealism')
+INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (2, N'History')
 GO
-INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (3, N'History')
+INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (3, N'Horror')
 GO
-INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (4, N'Thriller')
+INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (4, N'Music')
 GO
-INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (5, N'Music')
+INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (5, N'Philosophy')
 GO
-INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (6, N'Art')
+INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (6, N'Surrealism')
 GO
-INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (7, N'Philosophy')
+INSERT [dbo].[Genre] ([GenreId], [Genre]) VALUES (7, N'Thriller')
 GO
 SET IDENTITY_INSERT [dbo].[Genre] OFF
 GO
@@ -111,11 +111,19 @@ INSERT [dbo].[Author] ([AuthorId], [AuthorName]) VALUES (5, N'Patti Smith')
 GO
 INSERT [dbo].[Author] ([AuthorId], [AuthorName]) VALUES (6, N'Bram Stoker')
 GO
+INSERT [dbo].[Author] ([AuthorId], [AuthorName]) VALUES (7, N'Peter Hook')
+GO
 SET IDENTITY_INSERT [dbo].[Author] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Book] ON 
 GO
-INSERT [dbo].[Book] ([BookId], [AuthorId], [GenreId], [BookName], [BookDescription], [BookStock], [BookPrice]) VALUES (1, 2, 1, N'Kafka on the Shore', N'Metaphysical cat shenanigans. Colonel Sanders is in it.', 100, CAST(55.00 AS Decimal(10, 2)))
+INSERT [dbo].[Book] ([BookId], [AuthorId], [GenreId], [BookName], [BookDescription], [BookStock], [BookPrice]) VALUES (1, 2, 6, N'Kafka on the Shore', N'Metaphysical cat shenanigans. Colonel Sanders is in it.', 100, CAST(55.00 AS Decimal(10, 2)))
+INSERT [dbo].[Book] ([BookId], [AuthorId], [GenreId], [BookName], [BookDescription], [BookStock], [BookPrice]) VALUES (2, 3, 5, N'The Communist Manifesto', N'Can go on a little bit..', 5, CAST(0.00 AS Decimal(10, 2)))
+INSERT [dbo].[Book] ([BookId], [AuthorId], [GenreId], [BookName], [BookDescription], [BookStock], [BookPrice]) VALUES (3, 6, 3, N'Dracula', N'Eh. Stoker stole the idea of Dracula from Le Fanu.', 20, CAST(10.00 AS Decimal(10, 2)))
+INSERT [dbo].[Book] ([BookId], [AuthorId], [GenreId], [BookName], [BookDescription], [BookStock], [BookPrice]) VALUES (4, 1, 7, N'Digital Fortress', N'Includes the most hilarious misunderstandings about cryptography.', 600, CAST(20.00 AS Decimal(10, 2)))
+INSERT [dbo].[Book] ([BookId], [AuthorId], [GenreId], [BookName], [BookDescription], [BookStock], [BookPrice]) VALUES (5, 5, 4, N'Just Kids', N'What a legend.', 12, CAST(10.00 AS Decimal(10, 2)))
+INSERT [dbo].[Book] ([BookId], [AuthorId], [GenreId], [BookName], [BookDescription], [BookStock], [BookPrice]) VALUES (6, 4, 5, N'The Phenomenology of Spirit', N'A book that made think I should stick to computer science.', 0, CAST(50.00 AS Decimal(10, 2)))
+
 GO
 
 SET IDENTITY_INSERT [dbo].[Book] OFF

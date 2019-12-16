@@ -23,7 +23,7 @@ function displayProducts(books) {
                 <td>${book.BookDescription}</td>
                 <td>${book.BookStock}</td>
                 <td class="price">&euro;${Number(book.BookPrice).toFixed(2)}</td>
-                <td>${returnAuthor(book.AuthorId)}</td>`
+                <td>${book.AuthorName}</td>`
       
         // If user logged in then show edit and delete buttons
         // To add - check user role        
@@ -50,7 +50,7 @@ function displayProducts(books) {
   function displayCategories(genres) {
     console.log(genres);
     const items = genres.map(genre => {
-      return `<a href="#" class="list-group-item list-group-item-action" onclick="updateProductsView(${genre.genreId})">${genre.Genre}</a>`;
+      return `<a href="#" class="list-group-item list-group-item-action" onclick="updateProductsView(${genre.GenreId})">${genre.GenreId}. ${genre.Genre}</a>`;
     });
   
     // Add an All categories link at the start
@@ -215,10 +215,12 @@ function displayProducts(books) {
   let addAuthorButton= document.getElementById('AddAuthorButton');
 
   if (userLoggedIn() === true) {
+    viewAuthorsButton.style.display = 'block';
     addProductButton.style.display = 'block';
     addAuthorButton.style.display = 'block';
   }
   else {
+    viewAuthorsButton.style.display = 'none';
     addProductButton.style.display = 'none';
     addAuthorButton.style.display = 'none';
   }
