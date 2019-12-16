@@ -42,6 +42,7 @@ async function addAuthor() {
       // <tr> is a table row and <td> a table division represents a column
   
         let row = `<tr>
+                <td>${author.AuthorId}</td>
                 <td>${author.AuthorName}</td>
              `        
         row+= '</tr>';
@@ -55,6 +56,6 @@ async function addAuthor() {
   
     // Set the innerHTML of the productRows root element = rows
     // Why use join('') ???
-    document.getElementById('AuthorRows').innerHTML = rows.join('');
+    document.getElementById('authorRows').innerHTML = rows.join('');
   } // end function
   
