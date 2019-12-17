@@ -17,7 +17,7 @@ Then to run the application:
 ```
 npm run dev, or alternatively npm run start
 ```
-To login into the respective user types, use *customer@cdrgames.com* & *admin@cdrgames.com* to login. Both of these accounts have the same password: password.
+To gain access as an authenticated user, use 'alice@web.com' as an email and 'password' as a password, providing you are using my sample data. 
 
 ## Built With
 
