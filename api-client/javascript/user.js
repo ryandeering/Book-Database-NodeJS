@@ -40,7 +40,7 @@ async function login() {
     console.log("response: " + json.user);
 
     // A successful login will return a user
-    if (json.user != false) {
+    if (json.user != undefined) {
       // If a user then record in session storage
       sessionStorage.loggedIn = true;
 

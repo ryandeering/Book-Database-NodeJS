@@ -226,4 +226,4 @@ showLoginLink();
 // Load products
 loadBooks();
 
-showaddBookButton();
+showAddBookButton();
