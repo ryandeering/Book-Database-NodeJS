@@ -1,0 +1,22 @@
+{
+    "connection":{
+        "user" : "your user here",
+        "password": "your password here",
+        "server" : "yourdb.database.windows.net",
+        "database" : "yourdb",
+        "parseJSON": true,
+        "options":
+        {
+            "encrypt" : true
+        },
+        "pool":
+        {
+        "min": 2,
+        "max": 4,
+        "idleTimeoutMillis": 30000
+        }
+    },
+    "keys": {
+        "secret": "your secret key"
+    }
+}
