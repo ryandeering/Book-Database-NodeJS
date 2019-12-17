@@ -14,7 +14,10 @@ const keys = config.get('keys');
 const validator = require('validator');
 
 // require the database connection
-const { sql, dbConnPoolPromise } = require('../database/db.js');
+const {
+  sql,
+  dbConnPoolPromise
+} = require('../database/db.js');
 
 // Define SQL statements here for use in function below
 // These are parameterised queries note @named parameters.
@@ -34,8 +37,9 @@ router.post('/auth', (req, res) => {
   // use passport to athenticate - uses local middleware
   // session false as this API is stateless
   passport.authenticate(
-    'local',
-    { session: false }, (error, user, info) => {
+    'local', {
+      session: false
+    }, (error, user, info) => {
       // authentication fails - return error
       if (error || !user) {
         res.status(400).json({
@@ -53,16 +57,26 @@ router.post('/auth', (req, res) => {
       };
 
       //assigns payload to req.user
-      req.login(payload, { session: false }, (error) => {
+      req.login(payload, {
+        session: false
+      }, (error) => {
         if (error) {
-          res.status(400).send({ error });
+          res.status(400).send({
+            error
+          });
         }
         // generate a signed json web token and return it in the response
         const token = jwt.sign(JSON.stringify(payload), keys.secret);
 
         // add the jwt to the cookie and send
-        res.cookie('jwt', token, { httpOnly: true, secure: false });
-        res.status(200).send({ "user": user.Email, token });
+        res.cookie('jwt', token, {
+          httpOnly: true,
+          secure: false
+        });
+        res.status(200).send({
+          "user": user.Email,
+          token
+        });
       });
     },
   )(req, res);
@@ -77,8 +91,12 @@ router.get('/logout', async (req, res) => {
 
 
     // add the jwt to the cookie and send
-    res.clearCookie('jwt', {path: '/'});
-    return res.status(200).send({"message": "Logged out"});
+    res.clearCookie('jwt', {
+      path: '/'
+    });
+    return res.status(200).send({
+      "message": "Logged out"
+    });
 
     // Catch and send errors  
   } catch (err) {
@@ -121,7 +139,9 @@ router.post('/', async (req, res) => {
   // If errors send details in response
   if (errors != "") {
     // return http response with  errors if validation failed
-    res.json({ "error": errors });
+    res.json({
+      "error": errors
+    });
     return false;
   }
 
